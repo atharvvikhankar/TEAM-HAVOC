@@ -266,13 +266,13 @@ export default function OnboardingPage() {
               <label className="text-xs font-bold uppercase text-foreground/50 mb-3 block">Primary Role <span className="text-red-500">*</span></label>
               <select value={formData.primaryRole} onChange={e => updateData("primaryRole", e.target.value)} className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium mb-4 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm appearance-none">
                 <option value="">Select Primary Role</option>
-                {["Developer", "Backend", "AI / ML", "UI/UX", "Product", "Research", "Presentation", "Pitching"].map(r => <option key={r} value={r}>{r}</option>)}
+                {["Full-Stack / Backend Lead", "AI/ML Lead", "Frontend & UI/UX Lead", "Data & Research Lead", "Design & Pitch Lead"].map(r => <option key={r} value={r}>{r}</option>)}
               </select>
 
               <label className="text-xs font-bold uppercase text-foreground/50 mb-3 block">Secondary Role (Optional)</label>
               <select value={formData.secondaryRole} onChange={e => updateData("secondaryRole", e.target.value)} className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium mb-6 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm appearance-none">
                 <option value="">Select Secondary Role</option>
-                {["Developer", "Backend", "AI / ML", "UI/UX", "Product", "Research", "Presentation", "Pitching"].map(r => <option key={r} value={r}>{r}</option>)}
+                {["Full-Stack / Backend Lead", "AI/ML Lead", "Frontend & UI/UX Lead", "Data & Research Lead", "Design & Pitch Lead"].map(r => <option key={r} value={r}>{r}</option>)}
               </select>
 
               <h3 className="text-xl font-black tracking-tight text-black mb-4 mt-8">What type of work do you enjoy most?</h3>
