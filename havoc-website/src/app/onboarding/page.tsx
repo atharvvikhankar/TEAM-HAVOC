@@ -17,7 +17,7 @@ export default function OnboardingPage() {
     name: "",
     phone: "",
     gender: "",
-    college: "",
+    college: "JNEC MGM",
     year: "",
     skills: [] as string[],
     hackathonExperience: "",
@@ -63,6 +63,9 @@ export default function OnboardingPage() {
   };
 
   const handleSubmit = async () => {
+    if (!formData.deadlineComfort) return toast.error("Deadline comfort is required");
+    if (!formData.availability) return toast.error("Availability is required");
+
     setSubmitting(true);
     try {
       const userRef = doc(db, "users", user.uid);
@@ -90,9 +93,23 @@ export default function OnboardingPage() {
   };
 
   const nextStep = () => {
-    if (step === 1 && !formData.phone.trim()) {
-      toast.error("Phone number is required");
-      return;
+    if (step === 1) {
+      if (!formData.name.trim()) return toast.error("Full Name is required");
+      if (!formData.phone.trim()) return toast.error("Phone number is required");
+      if (!formData.gender) return toast.error("Gender is required");
+    }
+    if (step === 2 && formData.skills.length === 0) {
+      return toast.error("Please select at least one contribution");
+    }
+    if (step === 3) {
+      if (!formData.projectExperience) return toast.error("Project experience is required");
+      if (!formData.programmingLevel) return toast.error("Programming level is required");
+    }
+    if (step === 4 && formData.aiTools.length === 0) {
+      return toast.error("Please select at least one AI tool");
+    }
+    if (step === 5 && !formData.primaryRole) {
+      return toast.error("Primary Role is required");
     }
     setStep(s => Math.min(s + 1, 6));
   };
@@ -104,7 +121,7 @@ export default function OnboardingPage() {
         return (
           <div className="flex flex-col gap-5">
             <div>
-              <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Full Name</label>
+              <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Full Name <span className="text-red-500">*</span></label>
               <input type="text" value={formData.name} onChange={e => updateData("name", e.target.value)} placeholder="e.g. John Doe" className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium text-foreground/80 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm" />
             </div>
             <div>
@@ -117,7 +134,7 @@ export default function OnboardingPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Gender</label>
+                <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Gender <span className="text-red-500">*</span></label>
                 <select value={formData.gender} onChange={e => updateData("gender", e.target.value)} className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium hover:border-black/20 focus:border-black/40 transition-colors shadow-sm appearance-none">
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
@@ -147,7 +164,7 @@ export default function OnboardingPage() {
         return (
           <div className="flex flex-col gap-8 pt-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-black mb-6">What can you contribute to HAVOC?</h2>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-black mb-6">What can you contribute to HAVOC? <span className="text-red-500 text-xl">*</span></h2>
               <div className="flex flex-wrap gap-2">
                 {["Frontend", "Backend", "Full Stack", "AI / ML", "Mobile Development", "UI/UX", "Cybersecurity", "Cloud / DevOps", "Blockchain", "Research", "Product", "Presentation", "Video / Design", "Other"].map(s => (
                   <button key={s} onClick={() => toggleArray("skills", s)} className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${formData.skills.includes(s) ? "bg-foreground text-background border-foreground" : "bg-white border-border text-foreground/60 hover:border-foreground/30"}`}>
@@ -172,7 +189,7 @@ export default function OnboardingPage() {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-black tracking-tight text-black mb-4">Have you built a complete project?</h3>
+              <h3 className="text-xl font-black tracking-tight text-black mb-4">Have you built a complete project? <span className="text-red-500 text-lg">*</span></h3>
               <div className="grid grid-cols-2 gap-2">
                 {["No", "College project", "Personal project", "Production project"].map(opt => (
                   <button key={opt} onClick={() => updateData("projectExperience", opt)} className={`py-3 rounded-xl text-sm font-semibold border transition-all ${formData.projectExperience === opt ? "bg-foreground text-background border-foreground" : "bg-white border-border text-foreground/60"}`}>
@@ -182,7 +199,7 @@ export default function OnboardingPage() {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-black tracking-tight text-black mb-4">Programming Level</h3>
+              <h3 className="text-xl font-black tracking-tight text-black mb-4">Programming Level <span className="text-red-500 text-lg">*</span></h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {["Beginner", "Basic", "Intermediate", "Advanced", "Expert"].map(opt => (
                   <button key={opt} onClick={() => updateData("programmingLevel", opt)} className={`py-3 rounded-xl text-sm font-semibold border transition-all ${formData.programmingLevel === opt ? "bg-foreground text-background border-foreground" : "bg-white border-border text-foreground/60"}`}>
@@ -197,7 +214,7 @@ export default function OnboardingPage() {
         return (
           <div className="flex flex-col gap-8 pt-4">
             <div>
-              <h3 className="text-xl font-black tracking-tight text-black mb-4">Which AI development tools have you used?</h3>
+              <h3 className="text-xl font-black tracking-tight text-black mb-4">Which AI development tools have you used? <span className="text-red-500 text-lg">*</span></h3>
               <div className="flex flex-wrap gap-2">
                 {["Claude Code", "Antigravity", "Cursor", "GitHub Copilot", "ChatGPT", "Gemini", "Windsurf", "Replit", "Other", "None"].map(opt => (
                   <button key={opt} onClick={() => toggleArray("aiTools", opt)} className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${formData.aiTools.includes(opt) ? "bg-foreground text-background border-foreground" : "bg-white border-border text-foreground/60"}`}>
@@ -246,7 +263,7 @@ export default function OnboardingPage() {
             <div>
               <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-black mb-8">Where do you fit in HAVOC?</h2>
               
-              <label className="text-xs font-bold uppercase text-foreground/50 mb-3 block">Primary Role</label>
+              <label className="text-xs font-bold uppercase text-foreground/50 mb-3 block">Primary Role <span className="text-red-500">*</span></label>
               <select value={formData.primaryRole} onChange={e => updateData("primaryRole", e.target.value)} className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium mb-4 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm appearance-none">
                 <option value="">Select Primary Role</option>
                 {["Developer", "Backend", "AI / ML", "UI/UX", "Product", "Research", "Presentation", "Pitching"].map(r => <option key={r} value={r}>{r}</option>)}
@@ -273,11 +290,7 @@ export default function OnboardingPage() {
         return (
           <div className="flex flex-col gap-8 pt-4">
             <div>
-              <h3 className="text-xl font-black tracking-tight text-black mb-4">Why do you want to join HAVOC?</h3>
-              <textarea value={formData.motivation} onChange={e => updateData("motivation", e.target.value)} className="w-full h-32 bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium resize-none" placeholder="Tell us your motivation..."></textarea>
-            </div>
-            <div>
-              <h3 className="text-xl font-black tracking-tight text-black mb-4">Are you comfortable working under hackathon deadlines?</h3>
+              <h3 className="text-xl font-black tracking-tight text-black mb-4">Are you comfortable working under hackathon deadlines? <span className="text-red-500 text-lg">*</span></h3>
               <div className="grid grid-cols-3 gap-2">
                 {["Yes", "Somewhat", "No"].map(opt => (
                   <button key={opt} onClick={() => updateData("deadlineComfort", opt)} className={`py-3 rounded-xl text-sm font-semibold border transition-all ${formData.deadlineComfort === opt ? "bg-foreground text-background border-foreground" : "bg-white border-border text-foreground/60"}`}>
@@ -287,7 +300,7 @@ export default function OnboardingPage() {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-black tracking-tight text-black mb-4">How much time can you contribute?</h3>
+              <h3 className="text-xl font-black tracking-tight text-black mb-4">How much time can you contribute? <span className="text-red-500 text-lg">*</span></h3>
               <div className="grid grid-cols-2 gap-2">
                 {["Low", "Moderate", "High", "All-in during hackathons"].map(opt => (
                   <button key={opt} onClick={() => updateData("availability", opt)} className={`py-3 rounded-xl text-sm font-semibold border transition-all ${formData.availability === opt ? "bg-foreground text-background border-foreground" : "bg-white border-border text-foreground/60"}`}>
