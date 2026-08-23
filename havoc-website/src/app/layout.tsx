@@ -14,15 +14,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HAVOC — Build. Break. Rebuild.",
+  title: "TEAM HAVOC",
   description:
-    "HAVOC is a student hackathon team building ambitious products, experimenting with emerging technology, and solving real-world problems.",
+    "Official website for TEAM HAVOC",
   openGraph: {
-    title: "HAVOC — Build. Break. Rebuild.",
+    title: "TEAM HAVOC",
     description:
-      "HAVOC is a student hackathon team building ambitious products, experimenting with emerging technology, and solving real-world problems.",
+      "Official website for TEAM HAVOC",
     type: "website",
+    siteName: "TEAM HAVOC",
   },
+  twitter: {
+    card: "summary",
+    title: "TEAM HAVOC",
+    description: "Official website for TEAM HAVOC",
+  }
 };
 
 export default function RootLayout({
