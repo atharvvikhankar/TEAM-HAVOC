@@ -4,11 +4,17 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const team = [
-  { name: "Team Member 01", role: "Full-Stack / Backend Lead", skills: ["Next.js", "Node.js", "Architecture"] },
-  { name: "Team Member 02", role: "AI/ML Lead", skills: ["Python", "LLMs", "Agents"] },
-  { name: "Team Member 03", role: "Frontend & UI/UX Lead", skills: ["React", "Figma", "Animations"] },
-  { name: "Team Member 04", role: "Data & Research Lead", skills: ["Analytics", "Research", "Strategy"] },
-  { name: "Team Member 05", role: "Design & Pitch Lead", skills: ["Storytelling", "Pitch Deck", "Branding"] },
+  { 
+    name: "Atharv Vikhankar", 
+    role: "Team Lead", 
+    github: "https://github.com/atharvvikhankar",
+    linkedin: "https://www.linkedin.com/in/atharv-vikhankar"
+  },
+  { name: "Team Member 02", role: "Full-Stack / Backend Lead" },
+  { name: "Team Member 03", role: "AI/ML Lead" },
+  { name: "Team Member 04", role: "Frontend & UI/UX Lead" },
+  { name: "Team Member 05", role: "Data & Research Lead" },
+  { name: "Team Member 06", role: "Design & Pitch Lead" },
 ];
 
 const GithubIcon = () => (
@@ -41,17 +47,14 @@ export default function Team() {
           className="mb-20 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[11px] font-bold tracking-[0.35em] uppercase text-black/40 mb-3">Meet the Squad</p>
             <h2 className="text-4xl md:text-6xl font-black tracking-[-0.04em] uppercase text-black">
-              The People<br />
-              <span className="text-black/30">Behind HAVOC</span>
+              TEAM
             </h2>
           </div>
-          <div className="hidden md:block w-32 h-[1px] bg-black/10 mb-4" />
         </motion.div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 perspective-[1000px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-[1000px]">
           {team.map((member, i) => (
             <motion.div
               key={i}
@@ -60,25 +63,27 @@ export default function Team() {
               transition={{ delay: 0.1 + i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="group relative flex flex-col will-change-transform"
             >
-              {/* Outer Glow Effect on Hover */}
-              <div className="absolute -inset-0.5 bg-gradient-to-b from-black/5 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
 
               {/* Photo placeholder Container */}
-              <div className="relative w-full aspect-[4/5] bg-gradient-to-br from-zinc-100 to-zinc-50 rounded-2xl overflow-hidden mb-6 border border-black/[0.04] group-hover:border-black/10 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-500">
+              <div className="relative w-full aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 rounded-2xl overflow-hidden mb-5 border border-black/[0.04] group-hover:border-black/10 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-500">
                 
                 {/* Image / Avatar (Scales on hover) */}
                 <div className="absolute inset-0 flex items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat opacity-[0.03] group-hover:scale-105 group-hover:opacity-[0.06] transition-all duration-700 ease-out will-change-transform" />
                 
-                <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-700 ease-[0.16,1,0.3,1]">
-                  <div className="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center border border-black/5">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                    </svg>
+                {member.image ? (
+                  <img src={member.image} alt={member.name} className="absolute inset-0 w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-700 ease-[0.16,1,0.3,1]">
+                    <div className="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center border border-black/5">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                      </svg>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Refined Glass Overlay gradient */}
-                <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-zinc-200/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
               </div>
 
               {/* Info Details */}
@@ -86,29 +91,18 @@ export default function Team() {
                 <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-black/40 mb-1.5 transition-colors duration-300 group-hover:text-black/60">
                   {member.role}
                 </p>
-                <h3 className="font-extrabold text-lg mb-4 text-black tracking-tight">{member.name}</h3>
+                <h3 className="font-extrabold text-lg mb-5 text-black tracking-tight">{member.name}</h3>
 
-                {/* Polished Skill Badges */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {member.skills.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className="px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase bg-black/5 text-black/60 rounded-md border border-black/5 group-hover:bg-black/[0.07] group-hover:text-black/80 transition-colors duration-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
 
                 {/* Sophisticated Interactive Social Links */}
                 <div className="flex gap-5 mt-auto">
-                  <a href="#" className="group/link flex items-center gap-2 text-[11px] font-bold tracking-wide uppercase text-black/30 hover:text-black transition-colors duration-300">
+                  <a href={member.github || "#"} target={member.github ? "_blank" : undefined} rel={member.github ? "noopener noreferrer" : undefined} className="group/link flex items-center gap-2 text-[11px] font-bold tracking-wide uppercase text-black/30 hover:text-black transition-colors duration-300">
                     <span className="p-1.5 rounded-full bg-transparent group-hover/link:bg-black/5 transition-colors duration-300">
                       <GithubIcon />
                     </span>
                     GitHub
                   </a>
-                  <a href="#" className="group/link flex items-center gap-2 text-[11px] font-bold tracking-wide uppercase text-black/30 hover:text-[#0077b5] transition-colors duration-300">
+                  <a href={member.linkedin || "#"} target={member.linkedin ? "_blank" : undefined} rel={member.linkedin ? "noopener noreferrer" : undefined} className="group/link flex items-center gap-2 text-[11px] font-bold tracking-wide uppercase text-black/30 hover:text-[#0077b5] transition-colors duration-300">
                     <span className="p-1.5 rounded-full bg-transparent group-hover/link:bg-[#0077b5]/10 transition-colors duration-300">
                       <LinkedinIcon />
                     </span>

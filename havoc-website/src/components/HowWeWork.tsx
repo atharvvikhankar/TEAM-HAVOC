@@ -30,9 +30,6 @@ export default function HowWeWork() {
             <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-foreground/35 mb-3">
               Process
             </p>
-            <h2 className="text-3xl md:text-5xl font-black tracking-[-0.03em] uppercase leading-[1]">
-              How HAVOC<br className="hidden md:block" /> Operates
-            </h2>
           </motion.div>
           <motion.p
             initial={{ opacity: 0 }}

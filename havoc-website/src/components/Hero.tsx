@@ -72,15 +72,7 @@ export default function Hero() {
           className="w-12 h-px bg-foreground/20 mb-6 origin-left"
         />
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.7, ease: "easeOut" }}
-          className="text-sm md:text-base text-foreground/45 font-medium max-w-md mx-auto mb-8 leading-relaxed"
-        >
-          A student team building bold ideas and turning problems into working products through technology.
-        </motion.p>
+
 
         {/* CTAs */}
         <motion.div

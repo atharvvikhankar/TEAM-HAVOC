@@ -11,14 +11,16 @@ export default function Footer() {
 
         <div className="flex items-center gap-6">
           {[
-            { label: "GitHub", href: "#" },
-            { label: "LinkedIn", href: "#" },
-            { label: "Instagram", href: "#" },
-            { label: "Email", href: "mailto:contact@havoc.team" },
+            { label: "GitHub", href: "https://github.com/atharvvikhankar", target: "_blank" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/atharv-vikhankar", target: "_blank" },
+            { label: "Instagram", href: "https://www.instagram.com/atharva_vikhankar/", target: "_blank" },
+            { label: "Email", href: "mailto:atharvavikhankar@gmail.com" },
           ].map((link) => (
             <a
               key={link.label}
               href={link.href}
+              target={link.target}
+              rel={link.target ? "noopener noreferrer" : undefined}
               className="text-xs font-semibold text-muted hover:text-foreground transition-colors duration-200"
             >
               {link.label}
