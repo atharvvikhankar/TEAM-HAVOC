@@ -11,10 +11,12 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Defensively initialize to prevent Vercel prerender crashes if env vars are missing
+const isConfigured = !!firebaseConfig.apiKey;
+const app = isConfigured ? (!getApps().length ? initializeApp(firebaseConfig) : getApp()) : null as any;
+
+const auth = isConfigured ? getAuth(app) : null as any;
+const db = isConfigured ? getFirestore(app) : null as any;
 const googleProvider = new GoogleAuthProvider();
 
 export { app, auth, db, googleProvider };
