@@ -79,7 +79,7 @@ export default function MembersPage() {
     return <div className="min-h-screen bg-[#FAFAFA]" />;
   }
 
-  const roleOptions = ["Full-Stack / Backend Lead", "AI/ML Lead", "Frontend & UI/UX Lead", "Data & Research Lead", "Design & Pitch Lead", "Admin"];
+  const roleOptions = ["Team Lead", "Full-Stack / Backend Lead", "AI/ML Lead", "Frontend & UI/UX Lead", "Data & Research Lead", "Design & Pitch Lead", "Admin"];
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] pt-24 px-6 pb-20">
