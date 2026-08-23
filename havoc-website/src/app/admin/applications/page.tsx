@@ -98,6 +98,7 @@ export default function ApplicationsPage() {
                   <div>
                     <h2 className="text-2xl font-bold">{selectedApp.name}</h2>
                     <p className="text-sm text-foreground/50 font-medium">{selectedApp.email}</p>
+                    {selectedApp.phone && <p className="text-sm text-foreground/50 font-medium">{selectedApp.phone}</p>}
                   </div>
                 </div>
                 

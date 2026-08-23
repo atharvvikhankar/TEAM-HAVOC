@@ -15,6 +15,7 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     gender: "",
     college: "",
     year: "",
@@ -88,7 +89,13 @@ export default function OnboardingPage() {
     }
   };
 
-  const nextStep = () => setStep(s => Math.min(s + 1, 6));
+  const nextStep = () => {
+    if (step === 1 && !formData.phone.trim()) {
+      toast.error("Phone number is required");
+      return;
+    }
+    setStep(s => Math.min(s + 1, 6));
+  };
   const prevStep = () => setStep(s => Math.max(s - 1, 1));
 
   const renderStep = () => {
@@ -99,6 +106,10 @@ export default function OnboardingPage() {
             <div>
               <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Full Name</label>
               <input type="text" value={formData.name} onChange={e => updateData("name", e.target.value)} placeholder="e.g. John Doe" className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium text-foreground/80 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm" />
+            </div>
+            <div>
+              <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Phone Number <span className="text-red-500">*</span></label>
+              <input type="tel" value={formData.phone} onChange={e => updateData("phone", e.target.value)} placeholder="e.g. +91 9876543210" className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium text-foreground/80 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm" required />
             </div>
             <div>
               <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Email</label>
