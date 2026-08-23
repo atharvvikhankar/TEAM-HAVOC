@@ -122,7 +122,7 @@ export default function OnboardingPage() {
           <div className="flex flex-col gap-5">
             <div>
               <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Full Name <span className="text-red-500">*</span></label>
-              <input type="text" value={formData.name} onChange={e => updateData("name", e.target.value)} placeholder="e.g. John Doe" className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium text-foreground/80 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm" />
+              <input type="text" value={formData.name} onChange={e => updateData("name", e.target.value)} placeholder="Full Name" className="w-full bg-white border border-border px-4 py-3 rounded-xl outline-none font-medium text-foreground/80 hover:border-black/20 focus:border-black/40 transition-colors shadow-sm" />
             </div>
             <div>
               <label className="text-xs font-bold uppercase text-foreground/50 mb-2 block">Phone Number <span className="text-red-500">*</span></label>
