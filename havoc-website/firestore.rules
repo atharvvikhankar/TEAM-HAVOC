@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Function to check if a user is an admin
+    function isAdmin() {
+      return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+
+    // Function to check if a user is an approved member
+    function isApproved() {
+      return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == 'approved';
+    }
+
+    // Function to check if a user has chat access
+    function hasChatAccess() {
+      return isApproved() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.chatAccess == true;
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      // Admins can read/write everything
+      // Users can read/write their own document
+      // Approved members can read basic details of other members (could be restricted further if needed)
+      allow read: if isAdmin() || request.auth.uid == userId || isApproved();
+      
+      // Allow users to create their own doc during onboarding
+      allow create: if request.auth != null && request.auth.uid == userId;
+
+      // Allow users to update their own doc
+      allow update: if request.auth != null && request.auth.uid == userId || isAdmin();
+
+      allow delete: if isAdmin();
+    }
+
+    // Chat Messages
+    match /groups/havoc/messages/{messageId} {
+      // Admins can read and delete messages
+      // Approved members with chat access can read and create messages
+      allow read: if isAdmin() || hasChatAccess();
+      
+      allow create: if isAdmin() || (hasChatAccess() && request.resource.data.senderId == request.auth.uid);
+      
+      allow delete: if isAdmin();
+      
+      allow update: if false; // No message editing for now
+    }
+  }
+}

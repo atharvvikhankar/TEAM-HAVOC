@@ -1,0 +1,15 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\Atharva\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.14.1
+2 info using node@v24.3.0
+3 silly config load:file:C:\Users\Atharva\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:D:\Download Software\Antigravity\Project\TEAM HAVOC\havoc-website\.npmrc
+5 silly config load:file:C:\Users\Atharva\.npmrc
+6 silly config load:file:C:\Users\Atharva\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--cache" ".npm-cache-local" "--loglevel" "verbose"
+9 verbose logfile logs-max:10 dir:D:\Download Software\Antigravity\Project\TEAM HAVOC\havoc-website\.npm-cache-local\_logs\2026-08-23T04_54_10_839Z-
+10 verbose logfile D:\Download Software\Antigravity\Project\TEAM HAVOC\havoc-website\.npm-cache-local\_logs\2026-08-23T04_54_10_839Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+13 silly idealTree buildDeps
+14 http fetch GET 200 https://registry.npmjs.org/npm 10963ms
