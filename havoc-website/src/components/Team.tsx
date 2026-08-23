@@ -3,7 +3,15 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const team = [
+type TeamMember = {
+  name: string;
+  role: string;
+  image?: string;
+  github?: string;
+  linkedin?: string;
+};
+
+const team: TeamMember[] = [
   { 
     name: "Atharv Vikhankar", 
     role: "Team Lead", 
