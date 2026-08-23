@@ -4,10 +4,11 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const team = [
-  { name: "Team Member 01", role: "Team Lead", skills: ["Product", "Strategy", "Full Stack"] },
-  { name: "Team Member 02", role: "Full Stack Dev", skills: ["React", "Node.js", "Systems"] },
-  { name: "Team Member 03", role: "AI/ML Developer", skills: ["Python", "LLMs", "Data"] },
-  { name: "Team Member 04", role: "UI/UX Designer", skills: ["Figma", "Design", "Research"] },
+  { name: "Team Member 01", role: "Full-Stack / Backend Lead", skills: ["Next.js", "Node.js", "Architecture"] },
+  { name: "Team Member 02", role: "AI/ML Lead", skills: ["Python", "LLMs", "Agents"] },
+  { name: "Team Member 03", role: "Frontend & UI/UX Lead", skills: ["React", "Figma", "Animations"] },
+  { name: "Team Member 04", role: "Data & Research Lead", skills: ["Analytics", "Research", "Strategy"] },
+  { name: "Team Member 05", role: "Design & Pitch Lead", skills: ["Storytelling", "Pitch Deck", "Branding"] },
 ];
 
 const GithubIcon = () => (

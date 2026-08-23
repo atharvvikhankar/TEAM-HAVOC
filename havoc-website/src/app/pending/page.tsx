@@ -48,12 +48,6 @@ export default function PendingPage() {
           >
             Back to HAVOC
           </a>
-          <button
-            onClick={() => signOut(auth)}
-            className="w-full py-4 text-foreground/50 font-semibold hover:text-foreground transition-colors"
-          >
-            Sign Out
-          </button>
         </div>
       </motion.div>
     </div>
