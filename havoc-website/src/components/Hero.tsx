@@ -90,10 +90,10 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm mx-auto"
         >
           <a
-            href="#how-we-work"
+            href="/login"
             className="w-full sm:w-auto px-6 py-3 bg-foreground text-background text-sm font-semibold rounded-full flex items-center justify-center gap-2 hover:opacity-75 transition-opacity"
           >
-            Explore HAVOC
+            Join HAVOC
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
