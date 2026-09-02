@@ -35,6 +35,7 @@ export default function MemberProfilePage() {
   // form fields
   const [displayName, setDisplayName] = useState("");
   const [rollNo, setRollNo] = useState("");
+  const [birthDate, setBirthDate] = useState("");
   const [saving, setSaving] = useState(false);
 
   const expectedName = MEMBER_SLUGS[slug as string];
@@ -66,6 +67,7 @@ export default function MemberProfilePage() {
           setProfileData(data);
           setDisplayName((data as any).name || expectedName);
           setRollNo((data as any).rollNo || "");
+          setBirthDate((data as any).birthDate || "");
         } else {
           // Doc doesn't exist yet — pre-fill name from slug
           setDisplayName(expectedName);
@@ -88,6 +90,11 @@ export default function MemberProfilePage() {
     }
     if (!targetUid) return;
 
+    // Validation — all 3 fields are compulsory
+    if (!displayName.trim()) return toast.error("Display Name is required.");
+    if (!rollNo.trim()) return toast.error("Roll No is required.");
+    if (!birthDate) return toast.error("Birth Date is required.");
+
     setSaving(true);
     try {
       const userRef = doc(db, "users", targetUid);
@@ -97,6 +104,7 @@ export default function MemberProfilePage() {
         await updateDoc(userRef, {
           name: displayName.trim(),
           rollNo: rollNo.trim(),
+          birthDate,
         });
       } else {
         // Create a new document if it doesn't exist yet
@@ -104,6 +112,7 @@ export default function MemberProfilePage() {
           uid: targetUid,
           name: displayName.trim(),
           rollNo: rollNo.trim(),
+          birthDate,
           email: user.email || "",
           photoURL: user.photoURL || "",
           status: "pending",
@@ -116,6 +125,7 @@ export default function MemberProfilePage() {
         ...prev,
         name: displayName.trim(),
         rollNo: rollNo.trim(),
+        birthDate,
       }));
       toast.success("Profile updated successfully!");
       router.push("/");
@@ -196,7 +206,7 @@ export default function MemberProfilePage() {
             {/* Display Name */}
             <div className="flex flex-col gap-2">
               <label className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">
-                Display Name
+                Display Name <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -211,7 +221,7 @@ export default function MemberProfilePage() {
             {/* Roll No */}
             <div className="flex flex-col gap-2">
               <label className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">
-                Roll No
+                Roll No <span className="text-red-400">*</span>
                 <span className="ml-2 text-[9px] font-bold bg-black/5 text-black/40 px-1.5 py-0.5 rounded-full">Admin Only</span>
               </label>
               <input
@@ -223,6 +233,23 @@ export default function MemberProfilePage() {
                 className="w-full px-4 py-3 bg-[#F4F4F4] border border-transparent focus:border-black/20 focus:bg-white rounded-xl text-sm font-semibold text-black placeholder:text-black/25 outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <p className="text-[10px] text-black/30 font-medium">Your roll number will only be visible to the admin.</p>
+            </div>
+
+            {/* Birth Date */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">
+                Birth Date <span className="text-red-400">*</span>
+                <span className="ml-2 text-[9px] font-bold bg-black/5 text-black/40 px-1.5 py-0.5 rounded-full">Admin Only</span>
+              </label>
+              <input
+                type="date"
+                value={birthDate}
+                onChange={e => setBirthDate(e.target.value)}
+                disabled={!user}
+                max={new Date().toISOString().split("T")[0]}
+                className="w-full px-4 py-3 bg-[#F4F4F4] border border-transparent focus:border-black/20 focus:bg-white rounded-xl text-sm font-semibold text-black outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              <p className="text-[10px] text-black/30 font-medium">Your birth date will only be visible to the admin.</p>
             </div>
 
             {/* Update Button */}
@@ -248,8 +275,8 @@ export default function MemberProfilePage() {
           </div>
         </motion.div>
 
-        {/* Saved Roll No preview */}
-        {profileData?.rollNo && (
+        {/* Saved Info preview */}
+        {(profileData?.rollNo || profileData?.birthDate) && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -257,9 +284,19 @@ export default function MemberProfilePage() {
             className="mt-4 bg-white border border-black/[0.06] rounded-2xl p-5"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-black/30 mb-3">Saved Info</p>
-            <div className="flex justify-between items-center text-xs">
-              <span className="font-bold uppercase tracking-wide text-black/40">Roll No</span>
-              <span className="font-semibold text-black font-mono">{profileData.rollNo}</span>
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between items-center text-xs">
+                <span className="font-bold uppercase tracking-wide text-black/40">Roll No</span>
+                <span className="font-semibold text-black font-mono">{profileData.rollNo}</span>
+              </div>
+              {profileData?.birthDate && (
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold uppercase tracking-wide text-black/40">Birth Date</span>
+                  <span className="font-semibold text-black font-mono">
+                    {new Date(profileData.birthDate).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
+                  </span>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
