@@ -6,6 +6,7 @@ import { useRef } from "react";
 type TeamMember = {
   name: string;
   role: string;
+  slug: string;
   image?: string;
   github?: string;
   linkedin?: string;
@@ -14,15 +15,15 @@ type TeamMember = {
 const team: TeamMember[] = [
   { 
     name: "Atharv Vikhankar", 
-    role: "Team Lead", 
+    role: "Team Lead",
+    slug: "atharv-vikhankar",
     github: "https://github.com/atharvvikhankar",
     linkedin: "https://www.linkedin.com/in/atharv-vikhankar"
   },
-  { name: "Team Member 02", role: "Full-Stack / Backend Lead" },
-  { name: "Team Member 03", role: "AI/ML Lead" },
-  { name: "Team Member 04", role: "Frontend & UI/UX Lead" },
-  { name: "Team Member 05", role: "Data & Research Lead" },
-  { name: "Team Member 06", role: "Design & Pitch Lead" },
+  { name: "Shreya Kale", role: "Full-Stack / Backend Lead", slug: "shreya-kale" },
+  { name: "Atharv Sampal", role: "AI/ML Lead", slug: "atharv-sampal" },
+  { name: "Musab Shaikh", role: "Frontend & UI/UX Lead", slug: "musab-shaikh" },
+  { name: "Samiksha Sangave", role: "Data & Research Lead", slug: "samiksha-sangave" },
 ];
 
 const GithubIcon = () => (
@@ -102,7 +103,7 @@ export default function Team() {
                 <h3 className="font-extrabold text-lg mb-5 text-black tracking-tight">{member.name}</h3>
 
 
-                {/* Sophisticated Interactive Social Links */}
+                {/* Social Links */}
                 <div className="flex gap-5 mt-auto">
                   <a href={member.github || "#"} target={member.github ? "_blank" : undefined} rel={member.github ? "noopener noreferrer" : undefined} className="group/link flex items-center gap-2 text-[11px] font-bold tracking-wide uppercase text-black/30 hover:text-black transition-colors duration-300">
                     <span className="p-1.5 rounded-full bg-transparent group-hover/link:bg-black/5 transition-colors duration-300">
@@ -117,6 +118,17 @@ export default function Team() {
                     LinkedIn
                   </a>
                 </div>
+
+                {/* Edit Profile — unique link per member */}
+                <a
+                  href={`/profile/${member.slug}`}
+                  className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-black/30 hover:text-black border border-black/10 hover:border-black/30 rounded-lg px-3 py-1.5 transition-all duration-200 w-fit"
+                >
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  Edit Profile
+                </a>
               </div>
             </motion.div>
           ))}
