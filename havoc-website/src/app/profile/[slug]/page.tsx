@@ -118,6 +118,7 @@ export default function MemberProfilePage() {
         rollNo: rollNo.trim(),
       }));
       toast.success("Profile updated successfully!");
+      router.push("/");
     } catch (e) {
       console.error(e);
       toast.error("Failed to update profile.");
