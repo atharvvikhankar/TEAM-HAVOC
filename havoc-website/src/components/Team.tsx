@@ -20,10 +20,10 @@ const team: TeamMember[] = [
     github: "https://github.com/atharvvikhankar",
     linkedin: "https://www.linkedin.com/in/atharv-vikhankar"
   },
-  { name: "Shreya Kale", role: "Full-Stack / Backend Lead", slug: "shreya-kale" },
-  { name: "Atharv Sampal", role: "AI/ML Lead", slug: "atharv-sampal" },
+  { name: "Shreya Kale", role: "Frontend & UI/UX Lead", slug: "shreya-kale" },
+  { name: "Atharv Sampal", role: "Frontend & UI/UX Lead", slug: "atharv-sampal" },
   { name: "Musab Shaikh", role: "Frontend & UI/UX Lead", slug: "musab-shaikh" },
-  { name: "Samiksha Sangave", role: "Data & Research Lead", slug: "samiksha-sangave" },
+  { name: "Samiksha Sangave", role: "AI/ML Lead", slug: "samiksha-sangave" },
 ];
 
 const GithubIcon = () => (
