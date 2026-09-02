@@ -119,16 +119,6 @@ export default function Team() {
                   </a>
                 </div>
 
-                {/* Edit Profile — unique link per member */}
-                <a
-                  href={`/profile/${member.slug}`}
-                  className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-black/30 hover:text-black border border-black/10 hover:border-black/30 rounded-lg px-3 py-1.5 transition-all duration-200 w-fit"
-                >
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                  </svg>
-                  Edit Profile
-                </a>
               </div>
             </motion.div>
           ))}
