@@ -1,3 +1,4 @@
+// Team Section — updated
 "use client";
 
 import { motion, useInView } from "framer-motion";
