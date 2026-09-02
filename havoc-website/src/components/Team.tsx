@@ -17,6 +17,7 @@ const team: TeamMember[] = [
     name: "Atharv Vikhankar", 
     role: "Team Lead",
     slug: "atharv-vikhankar",
+    image: "/atharv.png",
     github: "https://github.com/atharvvikhankar",
     linkedin: "https://www.linkedin.com/in/atharv-vikhankar"
   },
