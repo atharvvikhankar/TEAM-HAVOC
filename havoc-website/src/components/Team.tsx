@@ -23,7 +23,7 @@ const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/atharv-vikhankar"
   },
   { name: "Shreya Kale", role: "Frontend & UI/UX Lead", slug: "shreya-kale" },
-  { name: "Musab Shaikh", role: "Full-Stack / Backend Lead", slug: "musab-shaikh" },
+  { name: "Musab Shaikh", role: "Full-Stack / Backend Lead", slug: "musab-shaikh", image: "/musab.png", github: "https://github.com/MusabSK07" },
   { name: "Atharv Sampal", role: "AI/ML Lead", slug: "atharv-sampal" },
   { name: "Samiksha Sangave", role: "Data & Research Lead", slug: "samiksha-sangave" },
 ];
