@@ -51,7 +51,7 @@ export default function AdminMembersPage() {
       <div className="flex items-end justify-between mb-8">
         <div>
           <h1 className="text-3xl font-black uppercase tracking-tight">Approved Members</h1>
-          <p className="text-sm text-black/40 font-medium mt-1">Full Name and Roll No are private — visible only to admin.</p>
+          <p className="text-sm text-black/40 font-medium mt-1">Full Name, Roll No, and Birth Date are private — visible only to admin.</p>
         </div>
         <button
           onClick={fetchMembers}
@@ -69,6 +69,7 @@ export default function AdminMembersPage() {
                 <th className="p-4 text-[10px] font-black uppercase tracking-widest text-black/30">Member</th>
                 <th className="p-4 text-[10px] font-black uppercase tracking-widest text-black/30">Full Name</th>
                 <th className="p-4 text-[10px] font-black uppercase tracking-widest text-black/30">Roll No</th>
+                <th className="p-4 text-[10px] font-black uppercase tracking-widest text-black/30">Birth Date</th>
                 <th className="p-4 text-[10px] font-black uppercase tracking-widest text-black/30 hidden sm:table-cell">Role</th>
                 <th className="p-4 text-[10px] font-black uppercase tracking-widest text-black/30 hidden md:table-cell">Year / College</th>
                 <th className="p-4 text-[10px] font-black uppercase tracking-widest text-black/30 text-right">Chat Access</th>
@@ -100,6 +101,15 @@ export default function AdminMembersPage() {
                       <span className="text-[11px] font-bold text-black/20 uppercase tracking-wider">Not set</span>
                     )}
                   </td>
+                  <td className="p-4">
+                    {member.birthDate ? (
+                      <span className="text-sm font-semibold text-black font-mono">
+                        {new Date(member.birthDate).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
+                      </span>
+                    ) : (
+                      <span className="text-[11px] font-bold text-black/20 uppercase tracking-wider">Not set</span>
+                    )}
+                  </td>
                   <td className="p-4 hidden sm:table-cell">
                     <span className="px-2 py-1 bg-black/5 rounded-lg text-[10px] font-bold uppercase tracking-wider text-black/60">
                       {member.primaryRole || "Member"}
@@ -121,7 +131,7 @@ export default function AdminMembersPage() {
               ))}
               {members.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="p-12 text-center text-black/30 font-bold uppercase tracking-widest text-xs">
+                  <td colSpan={7} className="p-12 text-center text-black/30 font-bold uppercase tracking-widest text-xs">
                     No approved members found.
                   </td>
                 </tr>
